@@ -100,7 +100,7 @@ public abstract class CustomCountDownTimer {
 		timer.cancel();
 		intervalReduced = true;
 		millisRemaining /= 2;
-		countDownInterval = 500;
+		countDownIntervalOrig = 500;
 		CreateCDT(0);
 		timer.start();
 
