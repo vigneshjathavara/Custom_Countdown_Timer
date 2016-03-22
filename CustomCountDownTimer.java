@@ -9,12 +9,13 @@ public abstract class CustomCountDownTimer {
 	long countDownInterval =0;
 	long millisRemaining = 0;
 	boolean intervalReduced = false;
-
+	long countDownIntervalOrig;
 	CountDownTimer timer=null;
 	boolean isPaused = true;
 
 	public CustomCountDownTimer(long millisInFuture, long countDownInterval)
 	{
+		this.countDownIntervalOrig = countDownInterval;
 		this.countDownInterval = countDownInterval;
 		this.millisInFuture = millisInFuture;
 		this.millisRemaining = millisInFuture;
@@ -24,7 +25,12 @@ public abstract class CustomCountDownTimer {
 
 	public void CreateCDT(long addition)
 	{
+		countDownInterval = countDownIntervalOrig;
 		millisRemaining +=addition;
+
+		if(millisRemaining <countDownInterval)
+			countdownInterval = millisRemaining;
+
 		timer = new CountDownTimer(millisRemaining,countDownInterval) {
 			@Override
 				public void onTick(long millisUntilFinished) {
